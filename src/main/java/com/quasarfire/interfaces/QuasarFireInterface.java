@@ -1,12 +1,15 @@
 package com.quasarfire.interfaces;
 
-import org.springframework.web.server.ResponseStatusException;
+import com.quasarfire.entities.Satelite;
+import com.quasarfire.entities.TopSecretRequestSplit;
+import com.quasarfire.entities.TopSecretResponse;
 
 import java.util.List;
 
 public interface QuasarFireInterface {
 
-    String getLocation(double [] distances);
+    TopSecretResponse getInfoTopSecret(List<Satelite> information);
 
-    String getMessage(List<List<String>> sendingMessages);
+    TopSecretResponse getInfoTopSecretSplit(String name, TopSecretRequestSplit requestSplit);
+
 }

@@ -1,5 +1,7 @@
 package com.quasarfire;
 
+import com.quasarfire.entities.ShipPosition;
+import com.quasarfire.interfaces.ObtainLocation;
 import com.quasarfire.interfaces.ObtainMessage;
 import com.quasarfire.interfaces.QuasarFireInterface;
 import org.junit.Assert;
@@ -15,6 +17,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class QuasarfireApplicationTests {
@@ -25,51 +29,55 @@ public class QuasarfireApplicationTests {
 	@Autowired
 	ObtainMessage obtainMessage;
 
+	@Autowired
+	ObtainLocation obtainLocation;
+
 	@Test
 	public void testGetPosition() {
-		double distances[] = {100,200,500};
-		String expected = "Coordenada X = -237.0214340768837, Coordenada Y = -136.73985079932635";
+		double [] distances = {100,200,500};
+		ShipPosition expected = new ShipPosition();
+		expected.setxPosition(-237.0214340768837);
+		expected.setyPosition(-136.73985079932635);
 
-		String result = quasarfire.getLocation(distances);
+		ShipPosition result = obtainLocation.getLocation(distances);
 
-		Assert.assertEquals(result, expected);
+		System.out.println(result.getxPosition());
+		System.out.println(expected.getxPosition());
+
+		Assert.assertTrue("Los valores coinciden",expected.getxPosition()== result.getxPosition() && expected.getyPosition()== result.getyPosition());
 	}
 
-	@Test
+	@Test(expected = ResponseStatusException.class)
 	public void testGetPositionTwoDinstancesFail()  {
-		double distances[] = {100,200};
+		double[] distances = {100,200};
 		String expected = "No se puede determinar la posicion de la nave";
 
-		String result = quasarfire.getLocation(distances);
-
-		Assert.assertEquals(result, expected);
+		ShipPosition result = obtainLocation.getLocation(distances);
 	}
 
-	@Test
+	@Test(expected = ResponseStatusException.class)
 	public void testGetPositionFourDistancesFail(){
-		double distances[] = {100,200,300,-500};
+		double[] distances = {100,200,300,-500};
 		String expected = "No se puede determinar la posicion de la nave";
 
-		String result = quasarfire.getLocation(distances);
+		ShipPosition result = obtainLocation.getLocation(distances);
 
-		Assert.assertEquals(result, expected);
 	}
 
-	@Test
+	@Test(expected = ResponseStatusException.class)
 	public void testGetPositionNullDistances(){
-		double distances[] = null;
 		String expected = "No se puede determinar la posicion de la nave";
 
-		String result = quasarfire.getLocation(distances);
+		ShipPosition result = obtainLocation.getLocation(null);
 
 		Assert.assertEquals(result, expected);
 	}
 
 	@Test
 	public void testGetMessageSuccess(){
-		String msg1 []= {"este","","un","","secreto"};
-		String msg2 []= {"","es","un","",""};
-		String msg3 []= {"este","","","mensaje","secreto"};
+		String[] msg1 = {"este","","un","","secreto"};
+		String[] msg2 = {"","es","un","",""};
+		String[] msg3 = {"este","","","mensaje","secreto"};
 		String expected = "este es un mensaje secreto";
 
 		List<List<String>> sendingMessages = new ArrayList<>();
@@ -84,9 +92,9 @@ public class QuasarfireApplicationTests {
 
 	@Test(expected = ResponseStatusException.class)
 	public void testGetMessageBadRequest(){
-		String msg1 []= {"este","","un","secreto"};
-		String msg2 []= {"este","","un","","secreto"};
-		String msg3 []= {"este","","un","","secreto"};
+		String[] msg1 = {"este","","un","secreto"};
+		String[] msg2 = {"este","","un","","secreto"};
+		String[] msg3 = {"este","","un","","secreto"};
 
 		List<List<String>> sendingMessages = new ArrayList<>();
 		sendingMessages.add(Arrays.stream(msg1).collect(Collectors.toList()));
@@ -98,9 +106,9 @@ public class QuasarfireApplicationTests {
 
 	@Test(expected = ResponseStatusException.class)
 	public void testGetMessageDataInsufficient(){
-		String msg1 []= {"este","","","","secreto"};
-		String msg2 []= {"","es","","",""};
-		String msg3 []= {"este","","","mensaje","secreto"};
+		String[] msg1 = {"este","","","","secreto"};
+		String[] msg2 = {"","es","","",""};
+		String[] msg3 = {"este","","","mensaje","secreto"};
 		String expected = "este es un mensaje secreto";
 
 		List<List<String>> sendingMessages = new ArrayList<>();
