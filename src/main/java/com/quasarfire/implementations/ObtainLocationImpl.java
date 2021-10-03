@@ -7,13 +7,19 @@ import com.quasarfire.interfaces.ObtainLocation;
 import org.apache.commons.math3.fitting.leastsquares.LeastSquaresOptimizer;
 import org.apache.commons.math3.fitting.leastsquares.LevenbergMarquardtOptimizer;
 import org.apache.commons.math3.util.Precision;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class ObtainLocationImpl implements ObtainLocation {
-    private final static double[][] satelitesLocation = {{-500,-200},{100,-100},{500,100}};
+    @Value("${message.inssuficient-info}")
+    private String insufficientInfoMessage;
+
+    @Value("#{${satelites-location}}")
+    private double[][] satelitesLocation;
+
 
     @Override
     public ShipPosition getLocation(double[] distances) {
@@ -29,7 +35,7 @@ public class ObtainLocationImpl implements ObtainLocation {
             return position;
         }catch (IllegalArgumentException | NullPointerException exception )
         {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No hay información suficiente para procesar la posicion y el mensaje");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, insufficientInfoMessage);
         }
     }
 }

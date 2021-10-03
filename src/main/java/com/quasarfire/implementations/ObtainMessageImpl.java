@@ -1,6 +1,7 @@
 package com.quasarfire.implementations;
 
 import com.quasarfire.interfaces.ObtainMessage;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -11,12 +12,14 @@ import java.util.List;
 
 @Service
 public class ObtainMessageImpl implements ObtainMessage {
+    @Value("${message.inssuficient-info}")
+    String insufficientInfoMessage;
 
     @Override
     public String getMessage(List<List<String>> sendingMessages) {
         List<List<String>> requestMessages = new ArrayList<>(sendingMessages);
         if (!validateLongMessages(requestMessages)){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No hay información suficiente para procesar la posicion y el mensaje");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, insufficientInfoMessage);
         }
 
         return composeMessage(sendingMessages);
@@ -51,13 +54,13 @@ public class ObtainMessageImpl implements ObtainMessage {
 
             composedMessage.removeAll(Collections.singleton(""));
             if (composedMessage.size() != lenMessage) {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No hay información suficiente para procesar la posicion y el mensaje");
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, insufficientInfoMessage);
             } else {
                 return String.join(" ", composedMessage);
             }
         }
 
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No hay información suficiente para procesar la posicion y el mensaje");
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, insufficientInfoMessage);
     }
 
 }

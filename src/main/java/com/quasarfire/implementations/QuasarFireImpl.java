@@ -8,6 +8,7 @@ import com.quasarfire.interfaces.ObtainLocation;
 import com.quasarfire.interfaces.ObtainMessage;
 import com.quasarfire.interfaces.QuasarFireInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -16,6 +17,9 @@ import java.util.*;
 
 @Service
 public class QuasarFireImpl implements QuasarFireInterface {
+
+    @Value("${message.satelite-not-found}")
+    private String sateliteNotFound;
 
     private List<Satelite> satelites = new ArrayList<>();
     private Map<String,Double> distances = new HashMap<>();
@@ -75,7 +79,7 @@ public class QuasarFireImpl implements QuasarFireInterface {
             }
         }
         if(!modified){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "El satelite no existe");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, sateliteNotFound);
         }
 
         messages.addAll(sendingMessages.values());
