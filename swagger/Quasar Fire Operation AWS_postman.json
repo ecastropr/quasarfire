@@ -1,0 +1,76 @@
+{
+	"info": {
+		"_postman_id": "d4a275d7-b02a-4e78-a344-747a45747c85",
+		"name": "Quasar Fire Operation AWS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "topSecretSplitAWS",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"distance\": 300,\n    \"message\": [\"\",\"es\",\"un\",\"mensaje\",\"secreto\"]\n}"
+				},
+				"url": {
+					"raw": "http://quasarfire-env.eba-bpepkz2m.us-east-2.elasticbeanstalk.com/api/quasarfire/topsecret/darkblader",
+					"protocol": "http",
+					"host": [
+						"quasarfire-env",
+						"eba-bpepkz2m",
+						"us-east-2",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"api",
+						"quasarfire",
+						"topsecret",
+						"darkblader"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "topSecretAWS",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"distance\": 56.789,\n        \"message\": [\n            \"este\",\"\",\"un\",\"\",\"secreto\"\n        ],\n        \"name\": \"Kenovi\"\n    },\n    {\n        \"distance\": 150.6,\n        \"message\": [\n            \"este\",\"es\",\"un\",\"\",\"secreto\"\n        ],\n        \"name\": \"Skywalker\"\n    },{\n        \"distance\": 800,\n        \"message\": [\n            \"este\",\"es\",\"\",\"mensaje\",\"secreto\"\n        ],\n        \"name\": \"Sato\"\n    }\n]"
+				},
+				"url": {
+					"raw": "http://quasarfire-env.eba-bpepkz2m.us-east-2.elasticbeanstalk.com/api/quasarfire/topsecret",
+					"protocol": "http",
+					"host": [
+						"quasarfire-env",
+						"eba-bpepkz2m",
+						"us-east-2",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"api",
+						"quasarfire",
+						"topsecret"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
