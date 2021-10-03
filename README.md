@@ -14,5 +14,14 @@ si se desea desplegar en un puerto distino se puede agregar (***server.port="num
 
 ***mvn spring-boot:run***
 
+Para el consumo de los servicios expuestos puedes consumir las siguientes Apis desde postman los cuales se encuentran expuestos en AWS:
+  - http://quasarfire-env.eba-bpepkz2m.us-east-2.elasticbeanstalk.com/api/quasarfire/topsecret
+  - http://quasarfire-env.eba-bpepkz2m.us-east-2.elasticbeanstalk.com/api/quasarfire/topsecret/:satelite_name --cambiar satelite_name por el nombre del satelite de cual desea enviar información
+
+Se referencian los documentos del swagger y la colección de postman:
+
+  - [Swagger](swagger/Quasar%20Fire%20Operation_swagger.json)
+  - [Postman-Collection](swagger/Quasar%20Fire%20Operation%20AWS_postman.json) -- En este archivo podras encontrar ejemplos del consumo de los servicios
+
 # Recuerda
 Siempre ejecutar los test unitarios para validar el funcionamiento correcto de las funcionalidades ya implementadas, de igual manera adiciona pruebas unitarias para las funcionalidades nuevas.
