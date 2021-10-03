@@ -12,16 +12,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class QuasarFireImpl implements QuasarFireInterface {
 
     private List<Satelite> satelites = new ArrayList<>();
-    private List<Double> distances = new ArrayList<>();
+    private Map<String,Double> distances = new HashMap<>();
     private ShipPosition positionShip = new ShipPosition();
-    private List<List<String>> sendingMessages = new ArrayList<>();
+    private Map<String,List<String>> sendingMessages = new HashMap<>();
 
     @Autowired
     private ObtainLocation obtainLocation;
@@ -30,27 +29,30 @@ public class QuasarFireImpl implements QuasarFireInterface {
     private ObtainMessage obtainMessage;
 
     private QuasarFireImpl() {
-        if(satelites != null){
-            satelites.add(Satelite.builder().name("Kenovi").xPosition(-500).yPosition(-200).build());
-            satelites.add(Satelite.builder().name("Skywalker").xPosition(-500).yPosition(-200).build());
-            satelites.add(Satelite.builder().name("Sato").xPosition(-500).yPosition(-200).build());
-        }
+
+            satelites.add(Satelite.builder().name("kenovi").xPosition(-500).yPosition(-200).build());
+            satelites.add(Satelite.builder().name("skywalker").xPosition(-500).yPosition(-200).build());
+            satelites.add(Satelite.builder().name("sato").xPosition(-500).yPosition(-200).build());
+
     }
 
 
     @Override
     public TopSecretResponse getInfoTopSecret(List<Satelite> sateliteInfo) {
-        String recoverMessage = null;
+        String recoverMessage;
         TopSecretResponse response;
+        List<List<String>> messages = new ArrayList<>();
+
         initLists();
-        for(int i = 0; i < sateliteInfo.size(); i++){
-           distances.add(sateliteInfo.get(i).getDistance());
-           sendingMessages.add(sateliteInfo.get(i).getMessage());
+        for(Satelite satelite: sateliteInfo){
+           distances.put(satelite.getName().toLowerCase(),satelite.getDistance());
+           sendingMessages.put(satelite.getName().toLowerCase(),satelite.getMessage());
         }
+        messages.addAll(sendingMessages.values());
 
-        positionShip = obtainLocation.getLocation(distances.stream().mapToDouble(Double::doubleValue).toArray());
+        positionShip = obtainLocation.getLocation(distances.values().stream().mapToDouble(Double::doubleValue).toArray());
 
-        recoverMessage = obtainMessage.getMessage(sendingMessages);
+        recoverMessage = obtainMessage.getMessage(messages);
 
         response = TopSecretResponse.builder().position(positionShip).message(recoverMessage).build();
         initLists();
@@ -59,26 +61,16 @@ public class QuasarFireImpl implements QuasarFireInterface {
 
     @Override
     public TopSecretResponse getInfoTopSecretSplit(String name, TopSecretRequestSplit requestSplit) {
-        String recoverMessage = null;
+        String recoverMessage;
         boolean modified = false;
         TopSecretResponse response;
+        List<List<String>> messages = new ArrayList<>();
 
-
-        for(int i = 0; i < satelites.size(); i++) {
-            if(satelites.get(i).getName().equals(name)){
-                if(satelites.get(i).getMessage() != null){
-                    satelites.get(i).setDistance(requestSplit.getDistance());
-                    distances.set(i,requestSplit.getDistance());
-                    satelites.get(i).setMessage(requestSplit.getMessage());
-                    sendingMessages.set(i,requestSplit.getMessage());
-                    modified = true;
-                }else{
-                    satelites.get(i).setDistance(requestSplit.getDistance());
-                    distances.add(requestSplit.getDistance());
-                    satelites.get(i).setMessage(requestSplit.getMessage());
-                    sendingMessages.add(requestSplit.getMessage());
-                    modified = true;
-                }
+        for(Satelite satelite: satelites) {
+            if(satelite.getName().equalsIgnoreCase(name)){
+                distances.put(name.toLowerCase(),requestSplit.getDistance());
+                sendingMessages.put(name.toLowerCase(),requestSplit.getMessage());
+                modified = true;
                 break;
             }
         }
@@ -86,19 +78,20 @@ public class QuasarFireImpl implements QuasarFireInterface {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "El satelite no existe");
         }
 
-        positionShip = obtainLocation.getLocation(distances.stream().mapToDouble(Double::doubleValue).toArray());
+        messages.addAll(sendingMessages.values());
+        positionShip = obtainLocation.getLocation(distances.values().stream().mapToDouble(Double::doubleValue).toArray());
 
-        recoverMessage = obtainMessage.getMessage(sendingMessages);
+        recoverMessage = obtainMessage.getMessage(messages);
 
         response = TopSecretResponse.builder().position(positionShip).message(recoverMessage).build();
-
+        initLists();
         return response;
     }
 
     private void initLists(){
-        distances = new ArrayList<>();
         positionShip = new ShipPosition();
-        sendingMessages = new ArrayList<>();
+        sendingMessages.clear();
+        distances.clear();
     }
 
 }
