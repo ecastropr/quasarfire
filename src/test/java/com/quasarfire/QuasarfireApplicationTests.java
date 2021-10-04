@@ -163,4 +163,36 @@ public class QuasarfireApplicationTests {
 
 	}
 
+	@Test
+	public void testValidateLongMessagesSuccess(){
+		List<List<String>> listMessage = new ArrayList<>();
+		boolean result;
+		String[] msg1 = {"este","es","un","mensaje","test"};
+		String[] msg2 = {"este","es","un","mensaje","test"};
+		String[] msg3 = {"","","","",""};
+		listMessage.add(Arrays.asList(msg1));
+		listMessage.add(Arrays.asList(msg2));
+		listMessage.add(Arrays.asList(msg3));
+
+		Assert.assertTrue(obtainMessage.validateLongMessages(listMessage));
+
+	}
+
+	@Test
+	public void testValidateLongMessagesFail(){
+		List<List<String>> listMessage = new ArrayList<>();
+		boolean result;
+		String[] msg1 = {"este","es","un","mensaje","test"};
+		String[] msg2 = {"este","es","mensaje","test"};
+		String[] msg3 = {"","","","",""};
+		listMessage.add(Arrays.asList(msg1));
+		listMessage.add(Arrays.asList(msg2));
+		listMessage.add(Arrays.asList(msg3));
+
+		result = obtainMessage.validateLongMessages(listMessage);
+
+		Assert.assertFalse(result);
+
+	}
+
 }

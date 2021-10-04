@@ -23,7 +23,7 @@ public class QuasarFireController {
         return quasarfire.getInfoTopSecret(satelites);
     }
 
-    @PostMapping(value = "/topsecret/{satelite_name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/topsecret_split/{satelite_name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public TopSecretResponse topSecretSplit(@Valid @PathVariable String satelite_name, @Valid @RequestBody TopSecretRequestSplit requestSplit){
 
         return quasarfire.getInfoTopSecretSplit(satelite_name , requestSplit);
