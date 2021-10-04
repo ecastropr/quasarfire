@@ -16,7 +16,7 @@ si se desea desplegar en un puerto distino se puede agregar (***server.port="num
 
 Para el consumo de los servicios expuestos puedes consumir las siguientes Apis desde postman los cuales se encuentran expuestos en AWS:
   - http://quasarfire-env.eba-bpepkz2m.us-east-2.elasticbeanstalk.com/api/quasarfire/topsecret
-  - http://quasarfire-env.eba-bpepkz2m.us-east-2.elasticbeanstalk.com/api/quasarfire/topsecret/:satelite_name --cambiar satelite_name por el nombre del satelite de cual desea enviar información
+  - http://quasarfire-env.eba-bpepkz2m.us-east-2.elasticbeanstalk.com/api/quasarfire/topsecret_split/:satelite_name --cambiar satelite_name por el nombre del satelite de cual desea enviar información
 
 Se referencian los documentos del swagger y la colección de postman:
 
