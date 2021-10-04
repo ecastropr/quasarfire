@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "84c7779f-16f7-4ee3-9507-ea792b6c9422",
-		"name": "Quasar Fire Operation AWS",
+		"_postman_id": "eaed72aa-999e-401e-ab1e-5b91c055a5be",
+		"name": "Quasar Fire Operation AWS Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -20,7 +20,7 @@
 					"raw": "{\n    \"distance\": 300,\n    \"message\": [\"\",\"es\",\"un\",\"mensaje\",\"secreto\"]\n}"
 				},
 				"url": {
-					"raw": "http://quasarfire-env.eba-bpepkz2m.us-east-2.elasticbeanstalk.com/api/quasarfire/topsecret/darkblader",
+					"raw": "http://quasarfire-env.eba-bpepkz2m.us-east-2.elasticbeanstalk.com/api/quasarfire/topsecret_split/darkblader",
 					"protocol": "http",
 					"host": [
 						"quasarfire-env",
@@ -32,7 +32,7 @@
 					"path": [
 						"api",
 						"quasarfire",
-						"topsecret",
+						"topsecret_split",
 						"darkblader"
 					]
 				}
