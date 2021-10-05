@@ -2,23 +2,23 @@ package com.quasarfire.entities;
 
 public class ShipPosition {
 
-    private double xPosition;
-    private double yPosition;
+    private double x;
+    private double y;
 
-    public double getyPosition() {
-        return yPosition;
+    public double getY() {
+        return y;
     }
 
-    public void setyPosition(double yPosition) {
-        this.yPosition = yPosition;
+    public void setY(double y) {
+        this.y = y;
     }
 
-    public double getxPosition() {
-        return xPosition;
+    public double getX() {
+        return x;
     }
 
-    public void setxPosition(double xPosition) {
-        this.xPosition = xPosition;
+    public void setX(double x) {
+        this.x = x;
     }
 
 }

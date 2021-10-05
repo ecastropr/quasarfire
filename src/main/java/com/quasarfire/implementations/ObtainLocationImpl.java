@@ -29,8 +29,8 @@ public class ObtainLocationImpl implements ObtainLocation {
             NonLinearLeastSquaresSolver nonLinearSolver = new NonLinearLeastSquaresSolver(new TrilaterationFunction(satelitesLocation, distances), new LevenbergMarquardtOptimizer());
             LeastSquaresOptimizer.Optimum SquaresOptimum = nonLinearSolver.solve();
             location = SquaresOptimum.getPoint().toArray();
-            position.setxPosition(Precision.round(location[0],2));
-            position.setyPosition(Precision.round(location[1],2));
+            position.setX(Precision.round(location[0],2));
+            position.setY(Precision.round(location[1],2));
 
             return position;
         }catch (IllegalArgumentException | NullPointerException exception )

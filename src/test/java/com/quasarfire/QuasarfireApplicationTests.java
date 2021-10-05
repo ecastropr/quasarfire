@@ -36,15 +36,15 @@ public class QuasarfireApplicationTests {
 	public void testGetPosition() {
 		double [] distances = {100,200,500};
 		ShipPosition expected = new ShipPosition();
-		expected.setxPosition(-237.02);
-		expected.setyPosition(-136.74);
+		expected.setX(-237.02);
+		expected.setY(-136.74);
 
 		ShipPosition result = obtainLocation.getLocation(distances);
 
-		System.out.println(result.getxPosition());
-		System.out.println(result.getyPosition());
+		System.out.println(result.getX());
+		System.out.println(result.getY());
 
-		Assert.assertTrue(expected.getxPosition()== result.getxPosition() && expected.getyPosition() == result.getyPosition());
+		Assert.assertTrue(expected.getX()== result.getX() && expected.getY() == result.getY());
 	}
 
 	@Test(expected = ResponseStatusException.class)
@@ -128,8 +128,8 @@ public class QuasarfireApplicationTests {
 		String[] msg2 = {"","es","","",""};
 		String[] msg3 = {"este","","","mensaje","secreto"};
 		ShipPosition position = new ShipPosition();
-		position.setxPosition(-4.32);
-		position.setyPosition(-116.47);
+		position.setX(-4.32);
+		position.setY(-116.47);
 
 		expected = TopSecretResponse.builder().position(position).message("este es un mensaje secreto").build();
 		satelites.add(Satelite.builder().name("kenovi").distance(10.3).message(List.of(msg1)).build());
@@ -139,8 +139,8 @@ public class QuasarfireApplicationTests {
 		response = quasarfire.getInfoTopSecret(satelites);
 
 		Assert.assertTrue(response.getMessage().equals(expected.getMessage())
-				&& response.getPosition().getxPosition() == expected.getPosition().getxPosition()
-				&& response.getPosition().getyPosition() == expected.getPosition().getyPosition());
+				&& response.getPosition().getX() == expected.getPosition().getX()
+				&& response.getPosition().getY() == expected.getPosition().getY());
 
 	}
 
@@ -153,8 +153,8 @@ public class QuasarfireApplicationTests {
 		String[] msg2 = {"","es","","",""};
 		String[] msg3 = {"este","","","mensaje","secreto"};
 
-		position.setxPosition(-385.82);
-		position.setyPosition(-177.15);
+		position.setX(-385.82);
+		position.setY(-177.15);
 		satelites.add(Satelite.builder().name("kenovi").distance(10.3).message(List.of(msg1)).build());
 		satelites.add(Satelite.builder().name("skywalker").distance(103).message(List.of(msg2)).build());
 		satelites.add(Satelite.builder().name("sato").distance(400).message(List.of(msg3)).build());
