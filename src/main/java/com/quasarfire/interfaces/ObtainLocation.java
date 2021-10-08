@@ -1,6 +1,6 @@
 package com.quasarfire.interfaces;
 
-import com.quasarfire.entities.ShipPosition;
+import com.quasarfire.models.ShipPosition;
 
 
 public interface ObtainLocation {

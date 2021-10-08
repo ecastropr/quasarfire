@@ -1,4 +1,4 @@
-package com.quasarfire.entities;
+package com.quasarfire.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

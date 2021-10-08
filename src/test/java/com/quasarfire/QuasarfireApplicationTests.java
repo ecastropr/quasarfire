@@ -1,8 +1,8 @@
 package com.quasarfire;
 
-import com.quasarfire.entities.Satelite;
-import com.quasarfire.entities.ShipPosition;
-import com.quasarfire.entities.TopSecretResponse;
+import com.quasarfire.models.Satelite;
+import com.quasarfire.models.ShipPosition;
+import com.quasarfire.models.TopSecretResponse;
 import com.quasarfire.interfaces.ObtainLocation;
 import com.quasarfire.interfaces.ObtainMessage;
 import com.quasarfire.interfaces.QuasarFireInterface;

@@ -1,4 +1,4 @@
-package com.quasarfire.entities;
+package com.quasarfire.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;

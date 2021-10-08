@@ -1,8 +1,8 @@
 package com.quasarfire.controller;
 
-import com.quasarfire.entities.Satelite;
-import com.quasarfire.entities.TopSecretRequestSplit;
-import com.quasarfire.entities.TopSecretResponse;
+import com.quasarfire.models.Satelite;
+import com.quasarfire.models.TopSecretRequestSplit;
+import com.quasarfire.models.TopSecretResponse;
 import com.quasarfire.interfaces.QuasarFireInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

@@ -1,8 +1,8 @@
 package com.quasarfire.interfaces;
 
-import com.quasarfire.entities.Satelite;
-import com.quasarfire.entities.TopSecretRequestSplit;
-import com.quasarfire.entities.TopSecretResponse;
+import com.quasarfire.models.Satelite;
+import com.quasarfire.models.TopSecretRequestSplit;
+import com.quasarfire.models.TopSecretResponse;
 
 import java.util.List;
 

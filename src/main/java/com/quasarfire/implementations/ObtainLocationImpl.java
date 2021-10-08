@@ -2,7 +2,7 @@ package com.quasarfire.implementations;
 
 import com.lemmingapex.trilateration.NonLinearLeastSquaresSolver;
 import com.lemmingapex.trilateration.TrilaterationFunction;
-import com.quasarfire.entities.ShipPosition;
+import com.quasarfire.models.ShipPosition;
 import com.quasarfire.interfaces.ObtainLocation;
 import org.apache.commons.math3.fitting.leastsquares.LeastSquaresOptimizer;
 import org.apache.commons.math3.fitting.leastsquares.LevenbergMarquardtOptimizer;
